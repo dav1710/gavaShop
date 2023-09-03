@@ -36,6 +36,17 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="custom-file">
+                                    <input type="file" name="cover" class="custom-file-input">
+                                    <label class="custom-file-label" for="inputGroupFile02">Choose Cover</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="">Upload</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="custom-file">
                                     <input type="file" name="images[]" multiple class="custom-file-input">
                                     <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                                 </div>

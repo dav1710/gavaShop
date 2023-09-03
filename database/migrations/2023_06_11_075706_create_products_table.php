@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('content');
-            $table->text('images');
+            $table->text('cover');
 
             $table->integer('price');
             $table->integer('count');
             $table->boolean('is_published')->default(true);
 
-            $table->foreignId('category_id')->nullable()->index()->constrained('categories');
+            $table->foreignId('category_id')->nullable()->index()->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

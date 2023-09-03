@@ -35,10 +35,8 @@
                                         <td> {{ $item->title }} </td>
                                         <td> {{ $item->price }} </td>
                                         <td>
-                                            @foreach($item->images as $image)
-                                            <img src="{{ asset( $image) }}" alt="multiple image"
+                                            <img src="{{ asset('cover/'.$item->cover) }}" alt="multiple image"
                                                 class="border border-blue-600" style="width: 200px">
-                                            @endforeach
                                         </td>
                                     </tr>
                                     @endforeach

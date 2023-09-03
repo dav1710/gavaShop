@@ -6,12 +6,12 @@ use App\Http\Requests\StoreProductRequest;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\ColorProduct;
+use App\Models\Image as ModelsImage;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\ShoesSize;
 use App\Models\ShoesSizeProduct;
 use App\Models\Tag;
-use Faker\Core\File;
 use Illuminate\Http\Request;
 use Image, Storage;
 
@@ -49,26 +49,42 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
-        $images = [];
-        foreach ($data['images'] as $image) {
-            $image_name = uniqid() . '.' . $image->getClientOriginalExtension();
-            $image_path = 'images/resource/' . $image_name;
-            Image::make($image)->save(public_path($image_path));
-            array_push($images, $image_path);
+        if($request->hasFile("cover")){
+            $file = $request->file("cover");
+            $imageName = time().'_'.$file->getClientOriginalName();
+            $file->move(\public_path("cover/"), $imageName);
+
+            // dd($imageName );
+            $product = new Product([
+                "title" => $request->title,
+                "description" => $request->description,
+                "content" => $request->content,
+                "cover" => $imageName,
+                "price" => $request->price,
+                "count" => $request->count,
+                "category_id" => $request->category_id,
+                "created_at" => now(),
+            ]);
+            $product->save();
         }
-        $data['images'] = $images;
-        $product = Product::firstOrCreate([
-            'title' => $data['title']
-        ], $data);
-        // dd($product->tags());
-        $product->tags()->attach($data['tags']);
-        $product->shoes_size()->attach($data['shoes_size']);
-        $product->colors()->attach($data['colors']);
+        if($request->hasFile("images")){
+            $files = $request->file("images");
+            foreach($files as $file){
+                $imageName = time().'_'.$file->getClientOriginalName();
+                $request['product_id'] = $product->id;
+                $request['image'] = $imageName;
+                $file->move(\public_path("/images"), $imageName);
+                ModelsImage::create($request->all());
+            }
+        }
+        $product->tags()->attach($request->tags);
+        $product->shoes_size()->attach($request->shoes_size);
+        $product->colors()->attach($request->colors);
 
         return redirect()->route('products.index');
+
     }
 
     /**
@@ -77,9 +93,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        $images = ModelsImage::where('product_id', $product->id)->get();
+        return view('product.show', compact('product', 'images'));
     }
 
     /**
@@ -88,9 +105,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $tags = Tag::all();
+        $colors = Color::all();
+        $categories = Category::all();
+        $shoes = ShoesSize::all();
+        return view('product.edit', compact('product', 'tags', 'colors', 'categories', 'shoes'));
     }
 
     /**
@@ -102,7 +123,49 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product_image_id = ModelsImage::find($id);
+        $images = $product_image_id->image;
+
+        if($request->hasFile("cover")){
+            if(file_exists(public_path("cover/".$product->cover))){
+                unlink(public_path("cover/".$product->cover));
+            }
+            $file = $request->file("cover");
+            $product->cover=time().'_'.$file->getClientOriginalName();
+            $file->move(\public_path("/cover"), $product->cover);
+            $request['cover'] = $product->cover;
+        }
+        $product->update([
+            "title" => $request->title,
+            "description" => $request->description,
+            "content" => $request->content,
+            "cover" => $product->cover,
+            "price" => $request->price,
+            "count" => $request->count,
+            "category_id" => $request->category_id,
+            "updated_at" => now(),
+        ]);
+        if($request->hasFile("images")){
+            foreach((array)$images as $item){
+                unlink(public_path("images/".$item));
+            }
+            $files = $request->file("images");
+            foreach($files as $file){
+                $imageName = time().'_'.$file->getClientOriginalName();
+                $request['product_id'] = $product->id;
+                $request['image'] = $imageName;
+                $file->move(\public_path("/images"), $imageName);
+                ModelsImage::create($request->all());
+            }
+        }
+
+
+        $product->tags()->sync($request->tags);
+        $product->shoes_size()->sync($request->shoes_size);
+        $product->colors()->sync($request->colors);
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -114,5 +177,18 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function deleteimage($id)
+    {
+        $images = ModelsImage::findOrFail($id);
+        dd(1);
+        if(file_exists(public_path("images/".$images->image))){
+            dd(1);
+            unlink(public_path("images/".$images->image));
+        }
+
+        ModelsImage::find($id)->delete();
+        return redirect()->back();
     }
 }

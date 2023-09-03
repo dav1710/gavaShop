@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 Route::get('/admin', AdminController::class);
+Route::delete('deleteimage/{$id}', [ProductController::class, 'deleteimage'])->name('deleteimage');
 Route::group(['prefix'=>'admin'], function(){
     Route::resource('categories', CategoryController::class);
     Route::resource('tags', TagController::class);
