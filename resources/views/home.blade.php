@@ -268,166 +268,23 @@
                     <div class="col-xl-12">
                         <div class="products-three__inner">
                             <ul>
-                                <!--Start Products Six Single-->
+                                @foreach ($latest_shoes as $item)
                                 <li class="products-three-single wow fadeInUp animated">
                                     <div class="products-three-single-img">
                                         <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
+                                                src="{{ asset('cover/'.$item->cover) }}" class="first-img"
+                                                alt="" /> <img src="{{ asset('cover/'.$item->cover) }}"
+                                                alt="" class="hover-img" /></a>
                                         <div class="products-grid-one__badge-box"> <span
                                                 class="bg_base badge new ">New</span> </div> <a href="cart.html"
                                             class="addcart btn--primary style2"> Add To Cart </a>
                                     </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
+                                    <div class="products-three-single-content text-center"> <span>{{ $item->title }}</span>
+                                        <h5><a href="shop-details-3.html"> {{ $item->description }} </a></h5>
+                                        <p>{{ $item->price }}$</p>
                                     </div>
                                 </li>
-                                <!--Start Products Six Single-->
-                                <li class="products-three-single wow fadeInUp animated">
-                                    <div class="products-three-single-img">
-                                        <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
-                                        <div class="products-grid-one__badge-box"> <span
-                                                class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                            class="addcart btn--primary style2"> Add To Cart </a>
-                                    </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
-                                    </div>
-                                </li>
-                                <!--Start Products Six Single-->
-                                <li class="products-three-single wow fadeInUp animated">
-                                    <div class="products-three-single-img">
-                                        <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
-                                        <div class="products-grid-one__badge-box"> <span
-                                                class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                            class="addcart btn--primary style2"> Add To Cart </a>
-                                    </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
-                                    </div>
-                                </li>
-                                <!--Start Products Six Single-->
-                                <li class="products-three-single wow fadeInUp animated">
-                                    <div class="products-three-single-img">
-                                        <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
-                                        <div class="products-grid-one__badge-box"> <span
-                                                class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                            class="addcart btn--primary style2"> Add To Cart </a>
-                                    </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
-                                    </div>
-                                </li>
-                                <!--Start Products Six Single-->
-                                <li class="products-three-single wow fadeInUp animated">
-                                    <div class="products-three-single-img">
-                                        <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
-                                        <div class="products-grid-one__badge-box"> <span
-                                                class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                            class="addcart btn--primary style2"> Add To Cart </a>
-                                    </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
-                                    </div>
-                                </li>
-                                <!--Start Products Six Single-->
-                                <li class="products-three-single wow fadeInUp animated">
-                                    <div class="products-three-single-img">
-                                        <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
-                                        <div class="products-grid-one__badge-box"> <span
-                                                class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                            class="addcart btn--primary style2"> Add To Cart </a>
-                                    </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
-                                    </div>
-                                </li>
-                                <!--Start Products Six Single-->
-                                <li class="products-three-single wow fadeInUp animated">
-                                    <div class="products-three-single-img">
-                                        <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
-                                        <div class="products-grid-one__badge-box"> <span
-                                                class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                            class="addcart btn--primary style2"> Add To Cart </a>
-                                    </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
-                                    </div>
-                                </li>
-                                <!--Start Products Six Single-->
-                                <li class="products-three-single wow fadeInUp animated">
-                                    <div class="products-three-single-img">
-                                        <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
-                                        <div class="products-grid-one__badge-box"> <span
-                                                class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                            class="addcart btn--primary style2"> Add To Cart </a>
-                                    </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
-                                    </div>
-                                </li>
-                                <!--Start Products Six Single-->
-                                <li class="products-three-single wow fadeInUp animated">
-                                    <div class="products-three-single-img">
-                                        <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
-                                        <div class="products-grid-one__badge-box"> <span
-                                                class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                            class="addcart btn--primary style2"> Add To Cart </a>
-                                    </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
-                                    </div>
-                                </li>
-                                <!--Start Products Six Single-->
-                                <li class="products-three-single wow fadeInUp animated">
-                                    <div class="products-three-single-img">
-                                        <a href="shop-details-3.html" class="d-block"> <img
-                                                src="{{ asset('main/assets/images/home-three/productss2-1.jpg') }}" class="first-img"
-                                                alt="" /> <img src="{{ asset('main/assets/images/home-three/productss2-hover-1.png') }}"
-                                                alt="" class="hover-img" /> </a>
-                                        <div class="products-grid-one__badge-box"> <span
-                                                class="bg_base badge new ">New</span> </div> <a href="cart.html"
-                                            class="addcart btn--primary style2"> Add To Cart </a>
-                                    </div>
-                                    <div class="products-three-single-content text-center"> <span>Men Shoes</span>
-                                        <h5><a href="shop-details-3.html"> Trendy stylish shoes </a></h5>
-                                        <p><del>$200.00</del> $159.00</p>
-                                    </div>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

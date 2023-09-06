@@ -125,7 +125,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $product_image_id = ModelsImage::find($id);
-        $images = $product_image_id->image;
+        // $images = $product_image_id->image;
 
         if($request->hasFile("cover")){
             if(file_exists(public_path("cover/".$product->cover))){
@@ -147,9 +147,6 @@ class ProductController extends Controller
             "updated_at" => now(),
         ]);
         if($request->hasFile("images")){
-            foreach((array)$images as $item){
-                unlink(public_path("images/".$item));
-            }
             $files = $request->file("images");
             foreach($files as $file){
                 $imageName = time().'_'.$file->getClientOriginalName();
@@ -176,19 +173,37 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+            if(file_exists(public_path("cover/".$product->cover))){
+                unlink(public_path("cover/".$product->cover));
+            }
+         $images=ModelsImage::where("product_id",$product->id)->get();
+            foreach($images as $image){
+            if (file_exists(public_path("images/".$image->image))) {
+                unlink(public_path("images/".$image->image));
+                }
+            }
+         $product->delete();
+         return redirect()->route('products.index');
     }
 
     public function deleteimage($id)
     {
         $images = ModelsImage::findOrFail($id);
-        dd(1);
         if(file_exists(public_path("images/".$images->image))){
-            dd(1);
             unlink(public_path("images/".$images->image));
         }
 
         ModelsImage::find($id)->delete();
-        return redirect()->back();
+        return back();
+    }
+    public function deletecover($id){
+        // dd(111);
+        $cover = Product::findOrFail($id)->cover;
+        if (file_exists(public_path("cover/".$cover))) {
+            unlink(public_path("cover/".$cover));
+       }
+       return back();
     }
 }

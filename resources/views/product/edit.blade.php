@@ -14,6 +14,32 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-lg-3">
+                <p>Cover:</p>
+                <form action="{{ route('products.deletecover', $product->id) }}" method="post">
+                <button class="btn text-danger">X</button>
+                @csrf
+                @method('post')
+                </form>
+                <img src="{{ asset('cover/'.$product->cover) }}" class="img-responsive" style="max-height: 100px; max-width: 100px;" alt="" srcset="">
+                <br>
+
+
+
+                 @if (count($product->images)>0)
+                 <p>Images:</p>
+                 @foreach ($product->images as $img)
+                 <form action="{{ route('products.deleteimage', $img->id) }}" method="post">
+                     <button class="btn text-danger">X</button>
+                     @csrf
+                     @method('post')
+                     </form>
+                 <img src="{{ asset('images/'.$img->image) }}" class="img-responsive" style="max-height: 100px; max-width: 100px;" alt="" srcset="">
+                 @endforeach
+                 @endif
+
+            </div>
+            <div class="col-lg-6">
             <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
@@ -43,7 +69,6 @@
                                 <span class="input-group-text" id="">Upload</span>
                             </div>
                         </div>
-                        <img class="img-responsive" src="{{ asset('cover/'.$product->cover) }}" alt="{{$product->cover}}" style="max-height: 100px; max-width: 100px"><br>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
@@ -55,11 +80,6 @@
                                 <span class="input-group-text" id="">Upload</span>
                             </div>
                         </div>
-                        @if (count($product->images) > 0)
-                            @foreach ($product->images as $img)
-                                <img class="img-responsive" src="{{ asset('images/'.$img->image) }}" alt="{{$img->image}}" style="max-height: 100px; max-width: 100px"> <br>
-                            @endforeach
-                        @endif
                     </div>
                     <div class="form-group">
                         <div class="select2-purple">
@@ -103,6 +123,7 @@
                     <button type="submit" class="btn btn-outline-primary">Update</button>
                 </div>
             </form>
+            </div>
         </div>
     </div>
 </section>
