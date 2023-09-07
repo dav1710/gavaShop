@@ -11,7 +11,9 @@ class Product extends Model
     protected $fillable = [
         'title', 'description', 'content', 'price', 'count', 'cover', 'is_published', 'category_id'
     ];
-
+    public function baskets() {
+        return $this->belongsToMany(Basket::class)->withPivot('quantity');
+    }
     public function categories()
     {
         return $this->hasOne(Category::class);

@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\{AdminController, CategoryController, ColorController, HomeController, TagController, ShoesSizeController, UserController, ProductController};
+use App\Http\Controllers\{AdminController, BasketController, CategoryController, ColorController, HomeController, MainController, TagController, ShoesSizeController, UserController, ProductController};
 use App\Http\Controllers\Auth\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,10 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [MainController::class, 'index']);
+Route::get('/basket/index', [BasketController::class , 'index'])->name('basket.index');
+Route::get('/basket/checkout', [BasketController::class , 'checkout'])->name('basket.checkout');
+Route::post('/basket/add/{id}', [BasketController::class , 'add'])
+    ->where('id', '[0-9]+')
+    ->name('basket.add');
+Route::post('/basket/plus/{id}', [BasketController::class , 'plus'])
+    ->where('id', '[0-9]+')
+    ->name('basket.plus');
+Route::post('/basket/minus/{id}', [BasketController::class , 'minus'])
+    ->where('id', '[0-9]+')
+    ->name('basket.minus');
 
-Route::delete('/deleteimage/{$id}', [ProductController::class, 'deleteimage']);
-// Route::delete('/deletecover/{$id}', [ProductController::class, 'deletecover'])->name('products.deletecover');
 Route::middleware('auth')->group(function () {
 Route::get('/admin', AdminController::class);
 Route::group(['prefix'=>'admin'], function(){
@@ -41,4 +51,8 @@ Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.pos
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
