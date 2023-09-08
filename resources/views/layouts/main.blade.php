@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- FlatIcon Css -->
     <link rel="stylesheet" href="{{ asset('main/assets/fonts/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('font_awesome/all.min.css') }}"  crossorigin="anonymous" referrerpolicy="no-referrer" >
 
     <!-- Slick Slider Css -->
     <link rel="stylesheet" href="{{ asset('main/assets/css/plugin/slick.css') }}">
@@ -97,7 +98,7 @@
                                         <p class="d-flex align-items-center"> <span class="icon"> <i
                                                     class="flaticon-power"></i> </span> Welcome to Gava Online Shop</p>
                                         <div class="right d-flex align-items-center ">
-                                            <a href="login.html"> Sign In / Register </a>
+                                            <a href="/"> Sign In / Register </a>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +115,7 @@
                                                     </li>
                                                     <li class="dropdown-list"> <a href="/">Shop</a>
                                                     </li>
-                                                    <li class="dropdown-list"> <a href="contact.html">Contact</a> </li>
+                                                    <li class="dropdown-list"> <a href="{{ route('contact') }}">Contact</a> </li>
                                                 </ul>
                                             </nav>
                                             @foreach($products as $product)
@@ -127,7 +128,7 @@
                                                 <ul class="main-menu__widge-box d-flex align-items-center ">
                                                     <li class="cartm"> <a href="{{ route('basket.index') }}" class="number cart-icon"> <i
                                                                 class="flaticon-shopping-cart"></i><span
-                                                                class="count">({{ $itemQuantity }})</span></a> </li>
+                                                                class="count">({{ isset($itemQuantity) ?  $itemQuantity : 0}})</span></a> </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -187,11 +188,12 @@
 
     </header>
 
-   @yield('main')
-
+    <main class="overflow-hidden">
+        @yield('main')
+    </main>
 
     <!--  Footer Three start -->
-    <footer class="footer-default footer-3 ">
+    <footer class="footer-default footer-style-1">
         <div class="footer-default__shap_1 position-absolute "> <img src="assets/images/shape/footer-shape-1.png"
                 alt=""> </div>
         <!--Start Footer-->
@@ -265,7 +267,7 @@
             <div class="container">
                 <div class="footer_bottom_content">
                     <div class="copyright wow fadeInUp animated">
-                        <p>© 2023 <a href="index.html">Gava.</a> All Rights Reserved.</p>
+                        <p>© 2023 <a href="/">Gava.</a> All Rights Reserved.</p>
                     </div>
                 </div>
             </div>
@@ -282,6 +284,7 @@
     <script src="{{ asset('main/assets/js/plugin/slick.min.js') }}"></script> <!-- magnific-popup v2.3.4 Js -->
     <script src="{{ asset('main/assets/js/plugin/jquery.magnific-popup.min.js') }}"></script> <!-- Tweenmax v2.3.4 Js -->
     <script src="{{ asset('main/assets/js/plugin/tweenMax.min.js') }}"></script> <!-- Nice Select Js -->
+    <script src="{{ asset('font_awesome/all.min.js') }}"></script>
     <script src="{{ asset('main/assets/js/plugin/nice-select.v1.0.min.js') }}"></script> <!-- Wow js -->
     <script src="{{ asset('main/assets/js/plugin/wow.v1.3.0.min.js') }}"></script> <!-- Wow js -->
     <script src="{{ asset('main/assets/js/plugin/jquery.countdown.min.js') }}"></script> <!-- Main js -->

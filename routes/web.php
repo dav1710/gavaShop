@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('/contact', [MainController::class, 'contact'])->name('contact');
 Route::get('/basket/index', [BasketController::class , 'index'])->name('basket.index');
 Route::get('/basket/checkout', [BasketController::class , 'checkout'])->name('basket.checkout');
 Route::post('/basket/add/{id}', [BasketController::class , 'add'])
@@ -29,6 +30,10 @@ Route::post('/basket/plus/{id}', [BasketController::class , 'plus'])
 Route::post('/basket/minus/{id}', [BasketController::class , 'minus'])
     ->where('id', '[0-9]+')
     ->name('basket.minus');
+Route::post('/basket/remove/{id}', [BasketController::class , 'remove'])
+    ->where('id', '[0-9]+')
+    ->name('basket.remove');
+Route::post('/basket/clear', [BasketController::class , 'clear'])->name('basket.clear');
 
 Route::middleware('auth')->group(function () {
 Route::get('/admin', AdminController::class);

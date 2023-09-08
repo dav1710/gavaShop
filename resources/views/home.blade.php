@@ -1,8 +1,5 @@
 @extends('layouts.main')
 @section('main')
-<main class="overflow-hidden">
-
-
     <!-- Start Main Slider -->
     <section class="banner-style-3 overflow-hidden">
         <!-- Banner Carousel -->
@@ -230,5 +227,4 @@
             </div>
         </div>
     </section>
-</main>
 @endsection
